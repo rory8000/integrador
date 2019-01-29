@@ -6,7 +6,7 @@
 
 window.onload = init;
 var socket = new WebSocket(
-		"ws://localhost:8080/integrador-1.0-SNAPSHOT/websocket");
+		"ws://192.168.100.229:8080/integrador-1.0-SNAPSHOT/websocket");
 socket.onmessage = onMessage;
 
 function onMessage(event) {

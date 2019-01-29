@@ -91,6 +91,7 @@ public class Cuestionario {
 	}
 
 	private static void inicializarTiempos() {
+		tiempos = new ArrayList<Integer>();
 		tiempos.add(128500);
 		tiempos.add(21000);
 		tiempos.add(26000);
