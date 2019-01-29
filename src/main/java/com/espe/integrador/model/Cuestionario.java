@@ -20,12 +20,12 @@ public class Cuestionario {
 		List<String> respuestasPregunta = null;
 
 		respuestasPregunta = new ArrayList<>();
-		respuestasPregunta.add("A. Arqueólogo.");
+		respuestasPregunta.add("A. Arqueï¿½logo.");
 		respuestasPregunta.add("B. Actor.");
-		respuestasPregunta.add("C. Albañil.");
+		respuestasPregunta.add("C. Albaï¿½il.");
 		respuestasPregunta.add("D. Arquitecto.");
 		pregunta = new Pregunta(0,
-				"Cómo se conoce a la persona que interpreta un papel en el teatro, cine o televisión?",
+				"Cï¿½mo se conoce a la persona que interpreta un papel en el teatro, cine o televisiï¿½n?",
 				respuestasPregunta);
 		preguntas.add(pregunta);
 
@@ -33,9 +33,9 @@ public class Cuestionario {
 		respuestasPregunta.add("A. Bambam.");
 		respuestasPregunta.add("B. Pablo.");
 		respuestasPregunta.add("C. Piedradura.");
-		respuestasPregunta.add("D. Rocapeña.");
+		respuestasPregunta.add("D. Rocapeï¿½a.");
 		pregunta = new Pregunta(1,
-				"En la serie animada \"Los Picapiedra\", ¿Cuál es el nombre del mejor amigo de Pedro?",
+				"En la serie animada \"Los Picapiedra\", ï¿½Cuï¿½l es el nombre del mejor amigo de Pedro?",
 				respuestasPregunta);
 		preguntas.add(pregunta);
 
@@ -51,7 +51,7 @@ public class Cuestionario {
 		respuestasPregunta.add("A. Un molusco.");
 		respuestasPregunta.add("B. Un instrumento musical.");
 		respuestasPregunta.add("C. Una prenda de vestir.");
-		respuestasPregunta.add("D. Un género literario.");
+		respuestasPregunta.add("D. Un gï¿½nero literario.");
 		pregunta = new Pregunta(3, "El calamar es:", respuestasPregunta);
 		preguntas.add(pregunta);
 
@@ -60,13 +60,13 @@ public class Cuestionario {
 		respuestasPregunta.add("B. Brasil.");
 		respuestasPregunta.add("C. Alemania.");
 		respuestasPregunta.add("D. Inglaterra.");
-		pregunta = new Pregunta(4, "¿Qué país ganó el Mundial de Fútbol 2002?", respuestasPregunta);
+		pregunta = new Pregunta(4, "ï¿½Quï¿½ paï¿½s ganï¿½ el Mundial de Fï¿½tbol 2002?", respuestasPregunta);
 		preguntas.add(pregunta);
 
 		respuestasPregunta = new ArrayList<>();
 		respuestasPregunta.add("A. Julieta.");
 		respuestasPregunta.add("B. Dulcinea del Toboso.");
-		respuestasPregunta.add("C. Antígona.");
+		respuestasPregunta.add("C. Antï¿½gona.");
 		respuestasPregunta.add("D. Melibea.");
 		pregunta = new Pregunta(5, "Don Quijote de la Mancha estaba enamorado de...", respuestasPregunta);
 		preguntas.add(pregunta);
@@ -76,16 +76,16 @@ public class Cuestionario {
 		respuestasPregunta.add("B. Simples.");
 		respuestasPregunta.add("C. Primos.");
 		respuestasPregunta.add("D. Fraccionarios.");
-		pregunta = new Pregunta(6, "¿Cómo se llaman los números que solo son divisibles para uno y para sí mismos?",
+		pregunta = new Pregunta(6, "ï¿½Cï¿½mo se llaman los nï¿½meros que solo son divisibles para uno y para sï¿½ mismos?",
 				respuestasPregunta);
 		preguntas.add(pregunta);
 
 		respuestasPregunta = new ArrayList<>();
 		respuestasPregunta.add("A. Esmeraldas y Pichincha.");
-		respuestasPregunta.add("B. Manabí y Esmeraldas.");
+		respuestasPregunta.add("B. Manabï¿½ y Esmeraldas.");
 		respuestasPregunta.add("C. Imbabura y Pichincha.");
-		respuestasPregunta.add("D. Manabí y Guayas.");
-		pregunta = new Pregunta(7, "La población de la Concordia es reclamada por las provincias de...",
+		respuestasPregunta.add("D. Manabï¿½ y Guayas.");
+		pregunta = new Pregunta(7, "La poblaciï¿½n de la Concordia es reclamada por las provincias de...",
 				respuestasPregunta);
 		preguntas.add(pregunta);
 	}
@@ -102,4 +102,12 @@ public class Cuestionario {
 
 	}
 
+	public static List<Pregunta> getPreguntas() {
+		return preguntas;
+	}
+
+	public static List<Integer> getTiempos() {
+		return tiempos;
+	}
+	
 }

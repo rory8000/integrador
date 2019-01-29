@@ -1,7 +1,9 @@
 package com.espe.integrador.logica;
 
+import java.util.List;
 import java.util.logging.Logger;
 
+import com.espe.integrador.model.Cuestionario;
 import com.espe.integrador.model.Pregunta;
 import com.espe.integrador.websockets.DeviceSessionHandler;
 import com.espe.integrador.websockets.DeviceWebSocketServer;
@@ -52,34 +54,16 @@ public class MyThread extends Thread {
 	}
 
 	private void play() throws InterruptedException {
-		// Thread.sleep(128500);
+		List<Pregunta> preguntas = Cuestionario.getPreguntas();
+		List<Integer> tiempos = Cuestionario.getTiempos();
+		for (int i = 0; i < preguntas.size(); i++) {
+			Thread.sleep(tiempos.get(0));
+			if (exit) {
+				break;
+			} else {
+				sessionHandler.sendAnswers(preguntas.get(i));
+			}
+		}
 
-		logger.info("ENVIANDO RESPUESTAS A PREGUNTA 1 ");
-		sessionHandler.sendAnswers(Pregunta.getPregunta1());
-
-		Thread.sleep(21000);
-
-		logger.info("ENVIANDO RESPUESTAS A PREGUNTA 2");
-		sessionHandler.sendAnswers(Pregunta.getPregunta2());
-
-		Thread.sleep(26000);
-
-		logger.info("ENVIANDO RESPUESTAS A PREGUNTA 3");
-		sessionHandler.sendAnswers(Pregunta.getPregunta3());
-
-		Thread.sleep(21000);
-
-		logger.info("ENVIANDO RESPUESTAS A PREGUNTA 4");
-		sessionHandler.sendAnswers(Pregunta.getPregunta4());
-
-		Thread.sleep(22500);
-
-		logger.info("ENVIANDO RESPUESTAS A PREGUNTA 5");
-		sessionHandler.sendAnswers(Pregunta.getPregunta5());
-
-		Thread.sleep(36000);
-
-		logger.info("ENVIANDO RESPUESTAS A PREGUNTA 6");
-		sessionHandler.sendAnswers(Pregunta.getPregunta6());
 	}
 }

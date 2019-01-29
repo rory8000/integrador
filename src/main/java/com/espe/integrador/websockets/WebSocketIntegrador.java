@@ -46,21 +46,28 @@ public class WebSocketIntegrador {
 		try (JsonReader reader = Json.createReader(new StringReader(message))) {
 			JsonObject jsonMessage = reader.readObject();
 			logger.info("Mensaje: " + jsonMessage);
-			if ("play".equals(jsonMessage.getString("action"))) {
-				this.usuario = jsonMessage.getString("usuario");
+			String action = jsonMessage.getString("action");
+
+			if ("registrar".equals(action)) {
+				registerUser(jsonMessage.getString("usuario"));
+			} else if ("play".equals(action)) {
 				play();
-			} else if ("stop".equals(jsonMessage.getString("action"))) {
+			} else if ("stop".equals(action)) {
 				stop();
-			} else if ("answer".equals(jsonMessage.getString("action"))) {
+			} else if ("answer".equals(action)) {
 				int codigoPregunta = jsonMessage.getInt("codigoPregunta");
 				int codigoRespuesta = jsonMessage.getInt("codigoRespuesta");
 				guardarRespuesta(codigoPregunta, codigoRespuesta);
-			} else if ("stats".equals(jsonMessage.getString("action"))) {
+			} else if ("stats".equals(action)) {
 				enviarEstadisticas();
 			}
 			logger.info("Mensaje procesado");
 		}
 
+	}
+
+	private void registerUser(String user) {
+		this.usuario = user;
 	}
 
 	private void guardarRespuesta(int codigoPregunta, int codigoRespuesta) {
@@ -148,6 +155,13 @@ public class WebSocketIntegrador {
 	public void close(Session session) {
 		logger.info("CERRANDO SESSION");
 		myThread.detenerHilo();
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		sessionHandler.removeSession(session);
 	}
 
