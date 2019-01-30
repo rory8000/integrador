@@ -13,8 +13,19 @@ function onMessage(event) {
 	var mensaje = JSON.parse(event.data);
 	console.log('mensaje', mensaje)
 	if (mensaje.action === "pregunta") {
+		
 		printPreguntaElement(mensaje);
 	}
+	else if (mensaje.action === "Estadisticas") {
+		printEstadisticas(mensaje);
+		
+		
+	}
+}
+
+function printEstadisticas(estadistica) {
+	console.log(estadistica);
+	
 }
 
 // {
@@ -53,6 +64,7 @@ function printPreguntaElement(pregunta) {
 		// botonvar.addEventListener("click", enviarRespuesta);
 		botonvar.setAttribute("onclick", "enviarRespuesta(" + pregunta.id
 				+ ", " + i + ");");
+		botonvar.setAttribute("class", "btn btn-primary");
 		botonvar.innerHTML = pregunta.respuestas[i];
 		tdvar.appendChild(botonvar);
 
