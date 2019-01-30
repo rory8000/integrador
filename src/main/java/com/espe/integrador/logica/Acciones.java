@@ -13,22 +13,21 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import com.espe.integrador.model.Estadistica;
 
+@ApplicationScoped
 public class Acciones {
 
 	private final Logger logger = Logger.getLogger(Acciones.class.getName());
 
 	private Connection conexion;
 
-	public Acciones() throws SQLException {
-		conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/integrador", "postgres", "postgres");
-	}
-
 	public void guardarRespuesta(String nombreUsuario, int codigoPregunta, int codigoRespuesta) {
 		logger.info("USUARIO RESPONDIO EN PREGUNTA " + codigoPregunta + ", LA RESPUESTA " + codigoRespuesta);
 		try {
-			PreparedStatement st = conexion.prepareStatement(
+			PreparedStatement st = getConnection().prepareStatement(
 					"INSERT INTO respuesta_usuario ( usuario, fecha, id_respuesta,id_pregunta) VALUES (?, ?, ?, ?)");
 			st.setString(1, nombreUsuario);
 			st.setDate(2, new java.sql.Date(new Date().getTime()));
@@ -42,17 +41,22 @@ public class Acciones {
 	}
 
 	public void eliminarDatos() throws ClassNotFoundException, SQLException {
-		PreparedStatement st = conexion.prepareStatement("DELETE FROM respuesta_usuario");
+		PreparedStatement st = getConnection().prepareStatement("DELETE FROM respuesta_usuario");
 		st.executeUpdate();
 		st.close();
 	}
 
-	public List<Estadistica> enviarEstadisticas() throws Exception {
-		PreparedStatement st = conexion
-				.prepareStatement("SELECT usuario, id_pregunta, id_respuesta FROM respuesta_usuario");
-		// st.setString(1, this.usuario);
+	private Connection getConnection() throws SQLException {
+		if (conexion == null) {
+			conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/integrador", "postgres",
+					"postgres");
+		}
+		return conexion;
+	}
 
-		// System.out.println("BUSCANDO " + this.usuario);
+	public List<Estadistica> enviarEstadisticas() throws Exception {
+		PreparedStatement st = getConnection()
+				.prepareStatement("SELECT usuario, id_pregunta, id_respuesta FROM respuesta_usuario");
 		ResultSet rs = st.executeQuery();
 		Map<Integer, Integer> respuestas = new HashMap<>();
 		Map<String, Map<Integer, Integer>> usuarios = new HashMap<>();
@@ -69,16 +73,27 @@ public class Acciones {
 
 		}
 
-		st = conexion.prepareStatement("SELECT id, id_respuesta_correcta FROM catalogo_pregunta");
+		PreparedStatement st2 = getConnection().prepareStatement("SELECT id, id_respuesta_correcta FROM catalogo_pregunta");
+		ResultSet rs2 = st2.executeQuery();
 
 		Map<Integer, Integer> mapaRespuestas = new HashMap<Integer, Integer>();
-		
+		while (rs2.next()) {
+			int codigoPregunta = rs2.getInt("id");
+			int codigoRespuesta = rs2.getInt("id_respuesta_correcta");
+			mapaRespuestas.put(codigoPregunta, codigoRespuesta);
+		}
+
+		rs.close();
+		rs2.close();
 		st.close();
+		st2.close();
 
 		return calificar(mapaRespuestas, usuarios);
 	}
 
 	private List<Estadistica> calificar(Map<Integer, Integer> respuestas, Map<String, Map<Integer, Integer>> usuarios) {
+		logger.info("respuestas: "+  respuestas);
+		logger.info("usuarios: "+  usuarios);
 		List<Estadistica> list = new ArrayList<>();
 		for (Entry<String, Map<Integer, Integer>> usuario : usuarios.entrySet()) {
 			int bien = 0;
@@ -88,9 +103,10 @@ public class Acciones {
 				if (respuesta == respuestaUsuario.getValue()) {
 					bien++;
 				}
-				estadistica.setPreguntasCorrectas(bien);
-				list.add(estadistica);
+				
 			}
+			estadistica.setPreguntasCorrectas(bien);
+			list.add(estadistica);
 		}
 		return list;
 	}
@@ -98,7 +114,7 @@ public class Acciones {
 	public void cerrarConexion() {
 		if (conexion != null) {
 			try {
-				conexion.close();
+				getConnection().close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

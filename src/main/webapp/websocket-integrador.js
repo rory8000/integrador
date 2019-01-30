@@ -13,19 +13,17 @@ function onMessage(event) {
 	var mensaje = JSON.parse(event.data);
 	console.log('mensaje', mensaje)
 	if (mensaje.action === "pregunta") {
-		
+
 		printPreguntaElement(mensaje);
-	}
-	else if (mensaje.action === "Estadisticas") {
+	} else if (mensaje.action === "Estadisticas") {
 		printEstadisticas(mensaje);
-		
-		
+
 	}
 }
 
 function printEstadisticas(estadistica) {
 	console.log(estadistica);
-	
+
 }
 
 // {
@@ -168,24 +166,36 @@ function resetear_contenido() {
 
 function labelStart() {
 	var x = document.getElementById("inputNombre");
-	var name = x.value
-	x.style.display = "none";
+	if (x) {
+		var name = x.value
+		x.style.display = "none";
+	}
 	var registerButton = document.getElementById("register-button");
-	registerButton.style.display = "none";
+	if (registerButton) {
+		registerButton.style.display = "none";
+	}
 
 	var x = document.getElementById("labelNombre");
-	x.innerHTML = 'Bienvenido ' + name
+	if (x) {
+		x.innerHTML = 'Bienvenido ' + name
+	}
 }
 
 function labelsInit() {
-	var x = document.getElementById("inputNombre");
-	x.style.display = "block";
+	var inputNombre = document.getElementById("inputNombre");
+	if (inputNombre) {
+		inputNombre.style.display = "block";
+	}
 
-	var x = document.getElementById("labelNombre");
-	x.innerHTML = 'Ingresa tu nombre:'
+	var labelNombre = document.getElementById("labelNombre");
+	if (labelNombre) {
+		labelNombre.innerHTML = 'Ingresa tu nombre:'
+	}
 
 	var registerButton = document.getElementById("register-button");
-	registerButton.style.display = "block";
+	if (registerButton) {
+		registerButton.style.display = "block";
+	}
 }
 
 function init() {
