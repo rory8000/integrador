@@ -20,12 +20,12 @@ public class Cuestionario {
 		List<String> respuestasPregunta = null;
 
 		respuestasPregunta = new ArrayList<>();
-		respuestasPregunta.add("A. Arque�logo.");
+		respuestasPregunta.add("A. Arqueólogo.");
 		respuestasPregunta.add("B. Actor.");
-		respuestasPregunta.add("C. Alba�il.");
+		respuestasPregunta.add("C. Albañil.");
 		respuestasPregunta.add("D. Arquitecto.");
 		pregunta = new Pregunta(0,
-				"C�mo se conoce a la persona que interpreta un papel en el teatro, cine o televisi�n?",
+				"Cómo se conoce a la persona que interpreta un papel en el teatro, cine o televisión?",
 				respuestasPregunta);
 		preguntas.add(pregunta);
 
@@ -33,7 +33,7 @@ public class Cuestionario {
 		respuestasPregunta.add("A. Bambam.");
 		respuestasPregunta.add("B. Pablo.");
 		respuestasPregunta.add("C. Piedradura.");
-		respuestasPregunta.add("D. Rocape�a.");
+		respuestasPregunta.add("D. Rocapeña.");
 		pregunta = new Pregunta(1,
 				"En la serie animada \"Los Picapiedra\", �Cu�l es el nombre del mejor amigo de Pedro?",
 				respuestasPregunta);
@@ -92,8 +92,8 @@ public class Cuestionario {
 
 	private static void inicializarTiempos() {
 		tiempos = new ArrayList<Integer>();
-		tiempos.add(128500);
-		tiempos.add(21000);
+		tiempos.add(0);
+		tiempos.add(10000);
 		tiempos.add(26000);
 		tiempos.add(21000);
 		tiempos.add(22500);

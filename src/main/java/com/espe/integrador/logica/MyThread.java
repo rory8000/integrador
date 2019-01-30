@@ -6,11 +6,10 @@ import java.util.logging.Logger;
 import com.espe.integrador.model.Cuestionario;
 import com.espe.integrador.model.Pregunta;
 import com.espe.integrador.websockets.DeviceSessionHandler;
-import com.espe.integrador.websockets.DeviceWebSocketServer;
 
 public class MyThread extends Thread {
 
-	private final Logger logger = Logger.getLogger(DeviceWebSocketServer.class.getName());
+	private final Logger logger = Logger.getLogger(MyThread.class.getName());
 
 	private DeviceSessionHandler sessionHandler;
 
@@ -57,13 +56,20 @@ public class MyThread extends Thread {
 		List<Pregunta> preguntas = Cuestionario.getPreguntas();
 		List<Integer> tiempos = Cuestionario.getTiempos();
 		for (int i = 0; i < preguntas.size(); i++) {
-			Thread.sleep(tiempos.get(0));
+			Thread.sleep(tiempos.get(i));
 			if (exit) {
 				break;
 			} else {
 				sessionHandler.sendAnswers(preguntas.get(i));
 			}
 		}
+
+		enviarResultados();
+
+	}
+
+	private void enviarResultados() {
+		// TODO Auto-generated method stub
 
 	}
 }

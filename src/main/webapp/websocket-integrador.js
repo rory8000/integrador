@@ -6,7 +6,7 @@
 
 window.onload = init;
 var socket = new WebSocket(
-		"ws://192.168.100.229:8080/integrador-1.0-SNAPSHOT/websocket");
+		"ws://localhost:8080/integrador-1.0-SNAPSHOT/websocket");
 socket.onmessage = onMessage;
 
 function onMessage(event) {
@@ -91,6 +91,18 @@ function stopSocket() {
 	socket.send(JSON.stringify(action));
 }
 
+function register() {
+	var x = document.getElementById("inputNombre");
+	var name = x.value
+	var action = {
+		action : "register",
+		usuario : name
+	};
+
+	socket.send(JSON.stringify(action));
+	labelStart();
+}
+
 function getStats() {
 	var action = {
 		action : "stats"
@@ -100,16 +112,11 @@ function getStats() {
 }
 
 function playSocket() {
-	var x = document.getElementById("inputNombre");
-	var name = x.value
-
 	var action = {
-		action : "play",
-		usuario : name
+		action : "play"
 	};
 
 	socket.send(JSON.stringify(action));
-	labelStart()
 }
 
 // global variable for the player
@@ -163,6 +170,8 @@ function labelStart() {
 	var x = document.getElementById("inputNombre");
 	var name = x.value
 	x.style.display = "none";
+	var registerButton = document.getElementById("register-button");
+	registerButton.style.display = "none";
 
 	var x = document.getElementById("labelNombre");
 	x.innerHTML = 'Bienvenido ' + name
@@ -174,6 +183,9 @@ function labelsInit() {
 
 	var x = document.getElementById("labelNombre");
 	x.innerHTML = 'Ingresa tu nombre:'
+
+	var registerButton = document.getElementById("register-button");
+	registerButton.style.display = "block";
 }
 
 function init() {
