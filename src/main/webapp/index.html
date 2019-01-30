@@ -3,18 +3,37 @@
 
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Integrador</title>
 <script src="websocket-integrador.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+	crossorigin="anonymous">
 <body>
 
-	<br />
-	<label id="labelNombre"></label>
-	<input id="inputNombre" type="text">
-	<br />
-	<button id="register-button" onclick="register()">REGISTRARSE</button>
+	<div class="row justify-content-md-center">
+		<div class="col-md-3">
+		<img  class="img-fluid" src="img/logo.png">
+			<div class="form-group">
+				<label id="labelNombre"></label> <input class="form-control" id="inputNombre" type="text">
 
-	<br />
+				
+			</div>
+			<button class="btn btn-primary" id="register-button" onclick="register()">REGISTRARSE <i class="fas fa-users"></i></button>
+		</div>
+	</div>
+
+
+
+
+
 	<div id="content"></div>
 </body>
 </html>

@@ -3,25 +3,49 @@
 
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Integrador</title>
 <script src="websocket-integrador.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<body>
-	<iframe id="video" width="420" height="315"
-		src="https://www.youtube.com/embed/L9PB4MUWbHE?enablejsapi=1&html5=1"
-		frameborder="0" allowfullscreen></iframe>
-	<br />
 
-	<br />
-	<label id="labelNombre"></label>
-	<input id="inputNombre" type="text">
-	<br />
-	<button id="play-button">INICIAR</button>
-	<button onclick="playSocket()">INICIAR2</button>
-	<button id="pause-button">STOP</button>
-	<button onclick="getStats()">ESTADISTICAS</button>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+	crossorigin="anonymous">
+<body style="background-color: black; color: white;">
 
-	<br />
-	<div id="content"></div>
+	<div class="container">
+		<div class="row justify-content-md-center mb-4">
+			<div class="col-md-6">
+				<div class="embed-responsive embed-responsive-16by9">
+					<iframe id="video" width="850" height="480"
+						class="embed-responsive-item"
+						src="https://www.youtube.com/embed/L9PB4MUWbHE?enablejsapi=1&html5=1"
+						frameborder="0" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+
+		<div class="row justify-content-md-center">
+			<div class="col-md-6">
+				<button class="btn btn-success" id="play-button">
+					INICIAR <i class="fab fa-google-play"></i>
+				</button>
+				<button class="btn btn-danger" id="pause-button">
+					STOP <i class="far fa-stop-circle"></i>
+				</button>
+				<button class="btn btn-primary" onclick="getStats()">
+					ESTADISTICAS <i class="fas fa-chart-area"></i>
+				</button>
+			</div>
+		</div>
+
+	</div>
+
 </body>
 </html>
