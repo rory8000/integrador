@@ -6,7 +6,7 @@
 
 window.onload = init;
 var socket = new WebSocket(
-		"ws://localhost:8080/integrador-1.0-SNAPSHOT/websocket");
+		"ws://10.40.86.235:8080/integrador-1.0-SNAPSHOT/websocket");
 socket.onmessage = onMessage;
 
 function onMessage(event) {
@@ -25,17 +25,6 @@ function printEstadisticas(estadistica) {
 	console.log(estadistica);
 
 }
-
-// {
-// "action":"pregunta1",
-// "pregunta":"",
-// "respuestas":[
-// "A. Arqueólogo.",
-// "B. Actor.",
-// "C. Albañil.",
-// "D. Arquitecto."
-// ]
-// }
 
 function printPreguntaElement(pregunta) {
 	resetear_contenido();
@@ -177,7 +166,7 @@ function labelStart() {
 
 	var x = document.getElementById("labelNombre");
 	if (x) {
-		x.innerHTML = 'Bienvenido ' + name
+		x.innerHTML = 'Bienvenid@ ' + name
 	}
 }
 
