@@ -33,6 +33,27 @@ public class WebSocketIntegrador {
 	private Acciones acciones;
 
 	private MyThread myThread;
+	
+	@OnOpen
+	public void open(Session session) throws SQLException {
+		logger.info("ABRIENDO SESSION");
+		myThread = new MyThread(sessionHandler);
+		myThread.start();
+		sessionHandler.addSession(session);
+	}
+
+	@OnClose
+	public void close(Session session) {
+		logger.info("CERRANDO SESSION");
+		myThread.detenerHilo();
+		acciones.cerrarConexion();
+		sessionHandler.removeSession(session);
+	}
+
+	@OnError
+	public void onError(Throwable error) {
+		logger.log(Level.SEVERE, null, error);
+	}
 
 	@OnMessage
 	public void onMessage(String message, Session session) throws Exception {
@@ -89,25 +110,6 @@ public class WebSocketIntegrador {
 		myThread.iniciarPlay();
 	}
 
-	@OnOpen
-	public void open(Session session) throws SQLException {
-		logger.info("ABRIENDO SESSION");
-		myThread = new MyThread(sessionHandler);
-		myThread.start();
-		sessionHandler.addSession(session);
-	}
-
-	@OnClose
-	public void close(Session session) {
-		logger.info("CERRANDO SESSION");
-		myThread.detenerHilo();
-		acciones.cerrarConexion();
-		sessionHandler.removeSession(session);
-	}
-
-	@OnError
-	public void onError(Throwable error) {
-		logger.log(Level.SEVERE, null, error);
-	}
+	
 
 }

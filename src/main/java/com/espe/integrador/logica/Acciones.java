@@ -47,7 +47,7 @@ public class Acciones {
 	}
 
 	private Connection getConnection() throws SQLException {
-		if (conexion == null) {
+		if (conexion == null || conexion.isClosed()) {
 			conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/integrador", "postgres",
 					"postgres");
 		}

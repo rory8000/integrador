@@ -15,27 +15,29 @@ function onMessage(event) {
 	if (mensaje.action === "pregunta") {
 
 		printPreguntaElement(mensaje);
-	} else if (mensaje.action === "Estadisticas") {
+	} else if (mensaje.action === "estadisticas") {
 		printEstadisticas(mensaje);
-
 	}
 }
 
 function printEstadisticas(estadistica) {
+	resetear_contenido();
+	var content = document.getElementById("content");
+	var listVar = document.createElement("ol");
+	listVar.setAttribute("type", "1");
+	content.appendChild(listVar);
 	console.log(estadistica);
-
+	var data = estadistica.datos;
+	for (i = 0; i < data.length; i++) {
+		var usuario = data[i].usuario;
+		var correctas = data[i].correctas;
+		var premio = data[i].premio;
+		var itemVar = document.createElement("li");
+		itemVar.innerHTML = usuario + ' ' + correctas + ' ' + premio;
+		listVar.appendChild(itemVar)
+	}
 }
 
-// {
-// "action":"pregunta1",
-// "pregunta":"",
-// "respuestas":[
-// "A. Arqueólogo.",
-// "B. Actor.",
-// "C. Albañil.",
-// "D. Arquitecto."
-// ]
-// }
 
 function printPreguntaElement(pregunta) {
 	resetear_contenido();
