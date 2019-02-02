@@ -67,6 +67,8 @@ public class MyThread extends Thread {
 				sessionHandler.sendAnswers(preguntas.get(i));
 			}
 		}
+		
+		Thread.sleep(10000);
 
 		enviarResultados();
 
