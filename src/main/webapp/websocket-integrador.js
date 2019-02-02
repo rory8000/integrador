@@ -179,7 +179,7 @@ function labelStart() {
 
 	var x = document.getElementById("labelNombre");
 	if (x) {
-		x.innerHTML = 'Bienvenido ' + name
+		x.innerHTML = 'Bienvenid@ ' + name
 	}
 }
 
