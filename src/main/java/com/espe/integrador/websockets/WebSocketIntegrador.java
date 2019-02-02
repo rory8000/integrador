@@ -37,7 +37,7 @@ public class WebSocketIntegrador {
 	@OnOpen
 	public void open(Session session) throws SQLException {
 		logger.info("ABRIENDO SESSION");
-		myThread = new MyThread(sessionHandler);
+		myThread = new MyThread(sessionHandler, acciones);
 		myThread.start();
 		sessionHandler.addSession(session);
 	}
